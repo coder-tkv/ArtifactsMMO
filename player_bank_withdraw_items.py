@@ -2,7 +2,7 @@ import requests
 import os
 API_TOKEN = os.getenv('API_TOKEN')
 SERVER = "https://api.artifactsmmo.com"
-CHARACTER = 'arangaduy'
+CHARACTER = 'tkv'
 
 url = SERVER + '/my/' + CHARACTER + '/action/bank/withdraw'
 
@@ -13,8 +13,8 @@ headers = {
 }
 
 data = {
-    'code': 'ash_wood',
-    'quantity': 40
+    'code': 'copper_ore',
+    'quantity': 11
 }
 
 response = requests.post(url, headers=headers, json=data, allow_redirects=True)

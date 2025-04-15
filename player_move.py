@@ -2,7 +2,7 @@ import requests
 import os
 API_TOKEN = os.getenv('API_TOKEN')
 SERVER = "https://api.artifactsmmo.com"
-CHARACTER = 'tkv'
+CHARACTER = 'arangaduy'
 
 url = SERVER + '/my/' + CHARACTER + '/action/move'
 
@@ -13,7 +13,7 @@ headers = {
 }
 
 destination_coord = {
-    "x": 0,
+    "x": 4,
     "y": 1
 }
 

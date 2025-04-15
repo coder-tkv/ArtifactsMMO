@@ -13,8 +13,8 @@ headers = {
 }
 
 data = {
-    'code': 'ash_wood',
-    'quantity': 40
+    'code': 'copper_ore',
+    'quantity': 11
 }
 
 response = requests.post(url, headers=headers, json=data, allow_redirects=True)
