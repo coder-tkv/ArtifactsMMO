@@ -15,7 +15,6 @@ headers = {
 
 while True:
     response = requests.post(url, headers=headers, allow_redirects=True)
-    print(response.status_code)
     if response.status_code == 498:
         print("The character cannot be found on your account.")
         break
