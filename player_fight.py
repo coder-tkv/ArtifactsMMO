@@ -13,8 +13,8 @@ headers = {
 }
 
 response = requests.post(url, headers=headers, allow_redirects=True)
-data = response.json()
 if response.status_code == 200:
+    data = response.json()
     print(f"You {data['data']['fight']['result']} the fight!")
     print(f"You win {data['data']['fight']['xp']} Exp points")
     print(f"You win {data['data']['fight']['gold']} Gold")

@@ -18,8 +18,8 @@ destination_coord = {
 }
 
 response = requests.post(url, headers=headers, json=destination_coord, allow_redirects=True)
-data = response.json()
 if response.status_code == 200:
+    data = response.json()
     print(f"You arrived at {data['data']['destination']['name']}")
     print(f"The place look like {data['data']['destination']['skin']}")
     print(f"The place contains {data['data']['destination']['content']['code']}")
