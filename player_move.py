@@ -12,10 +12,16 @@ headers = {
     'Authorization': f'Bearer {API_TOKEN}'
 }
 
-data = {
-    "x": 2,
+destination_coord = {
+    "x": 0,
     "y": 1
 }
 
-response = requests.post(url, headers=headers, json=data, allow_redirects=True)
-print(response.json())
+response = requests.post(url, headers=headers, json=destination_coord, allow_redirects=True)
+data = response.json()
+if response.status_code == 200:
+    print(f"You arrived at {data['data']['destination']['name']}")
+    print(f"The place look like {data['data']['destination']['skin']}")
+    print(f"The place contains {data['data']['destination']['content']['code']}")
+else:
+    print(f'erreur : {response.status_code}')
