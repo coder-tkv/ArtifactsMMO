@@ -2,7 +2,7 @@ import requests
 import os
 API_TOKEN = os.getenv('API_TOKEN')
 SERVER = "https://api.artifactsmmo.com"
-CHARACTER = 'tkv'
+CHARACTER = 'arangaduy'
 
 url = SERVER + '/my/' + CHARACTER + '/action/unequip'
 
