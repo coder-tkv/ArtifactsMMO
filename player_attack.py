@@ -4,7 +4,7 @@ API_TOKEN = os.getenv('API_TOKEN')
 SERVER = "https://api.artifactsmmo.com"
 CHARACTER = 'tkv'
 
-url = SERVER + '/my/' + CHARACTER + '/action/move'
+url = SERVER + '/my/' + CHARACTER + '/action/fight'
 
 headers = {
     "Accept": "application/json",
@@ -12,10 +12,5 @@ headers = {
     'Authorization': f'Bearer {API_TOKEN}'
 }
 
-data = {
-    "x": 0,
-    "y": 0
-}
-
-response = requests.post(url, headers=headers, json=data, allow_redirects=True)
+response = requests.post(url, headers=headers, allow_redirects=True)
 print(response.json())
