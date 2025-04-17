@@ -24,4 +24,4 @@ if response.status_code == 200:
     print(f"The place look like {data['data']['destination']['skin']}")
     print(f"The place contains {data['data']['destination']['content']['code']}")
 else:
-    print(f'erreur : {response.status_code}')
+    print(f'error : {response.status_code}')
