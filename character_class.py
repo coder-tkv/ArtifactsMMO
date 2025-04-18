@@ -45,7 +45,7 @@ class Character:
                     return data['data']
                 elif response.status == 490:
                     print('Character already at destination.')
-                    return data['data']
+                    return data
                 else:
                     print(f'error : {response.status}')
                     print(data)
@@ -315,6 +315,29 @@ class Character:
             print(f"POST request failed: {e}")
             return None
 
+    async def recycle(self, code='copper_dagger', quantity=1):
+        url = self.SERVER + '/my/' + self.name + '/action/recycling'
+        recycle_data = {
+            'code': code,
+            'quantity': quantity
+        }
+        try:
+            async with self.session.post(url, json=recycle_data, headers=self.headers) as response:
+                data = await response.json()
+                print(f'---  {self.name}: recycle item ({code},{quantity})  |  {self.get_time()}  ---')
+                if response.status == 200:
+                    print(f'Recycled: {quantity} {code}')
+                    cooldown = data['data']["cooldown"]["total_seconds"]
+                    print(f'Cooldown: {cooldown}')
+                    await asyncio.sleep(cooldown)
+                    return data['data']
+                else:
+                    print(f'error : {response.status}')
+                    print(data)
+                    return None
+        except aiohttp.ClientError as e:
+            print(f"POST request failed: {e}")
+            return None
 
     async def get_inventory(self):
         url = self.SERVER + '/my/characters'
