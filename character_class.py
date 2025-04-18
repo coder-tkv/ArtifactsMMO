@@ -415,30 +415,29 @@ class Character:
 # usage example
 if __name__ == '__main__':
     async def tkv_run():
-        async with Character('tkv') as player:
-            await player.move(0, 1)
-            await player.fight()
-            await player.rest()
-            await player.move(-1, 0)
-            await player.gathering()
-            await player.unequip()
-            await player.equip()
-            await player.get_inventory()
-
-            await player.get_bank_items()
-            await player.get_bank_gold()
+        async with Character('tkv') as tkv:
+            await tkv.move(0, 1)
+            await tkv.fight()
+            await tkv.rest()
+            await tkv.move(-1, 0)
+            await tkv.gathering()
+            await tkv.unequip()
+            await tkv.equip()
+            await tkv.get_inventory()
+            await tkv.get_bank_items()
+            await tkv.get_bank_gold()
 
 
     async def arangaduy_run():
-        async with Character('arangaduy') as player:
-            await player.move(-1, 0)
-            await player.gathering()
-            await player.unequip()
-            await player.equip()
-            await player.move(0, 1)
-            await player.fight()
-            await player.rest()
-            await player.get_inventory()
+        async with Character('arangaduy') as arangaduy:
+            await arangaduy.move(-1, 0)
+            await arangaduy.gathering()
+            await arangaduy.unequip()
+            await arangaduy.equip()
+            await arangaduy.move(0, 1)
+            await arangaduy.fight()
+            await arangaduy.rest()
+            await arangaduy.get_inventory()
 
 
     async def main():
