@@ -107,7 +107,7 @@ class Character:
                 data = await response.json()
                 print(f'--- {self.name}: gathering ---')
                 if response.status == 200:
-                    print("Your character successfully gathered the ressource.")
+                    print("Your character successfully gathered the resource.")
                     cooldown = data['data']["cooldown"]["total_seconds"]
                     print(f'Cooldown: {cooldown}')
                     await asyncio.sleep(cooldown)
