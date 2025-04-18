@@ -42,10 +42,10 @@ class Character:
                     cooldown = data['data']["cooldown"]["total_seconds"]
                     print(f'Cooldown: {cooldown}')
                     await asyncio.sleep(cooldown)
-                    return data
+                    return data['data']
                 elif response.status == 490:
                     print('Character already at destination.')
-                    return data
+                    return data['data']
                 else:
                     print(f'error : {response.status}')
                     print(data)
@@ -69,7 +69,7 @@ class Character:
                     cooldown = data['data']["cooldown"]["total_seconds"]
                     print(f'Cooldown: {cooldown}')
                     await asyncio.sleep(cooldown)
-                    return data
+                    return data['data']
                 else:
                     print(f'error : {response.status}')
                     print(data)
@@ -90,7 +90,7 @@ class Character:
                     cooldown = data['data']["cooldown"]["total_seconds"]
                     print(f'Cooldown: {cooldown}')
                     await asyncio.sleep(cooldown)
-                    return data
+                    return data['data']
                 else:
                     print(f'error : {response.status}')
                     print(data)
@@ -110,7 +110,7 @@ class Character:
                     cooldown = data['data']["cooldown"]["total_seconds"]
                     print(f'Cooldown: {cooldown}')
                     await asyncio.sleep(cooldown)
-                    return data
+                    return data['data']
                 elif response.status == 497:
                     print("Your character's inventory is full.")
                     return None
@@ -121,7 +121,7 @@ class Character:
                     print("The resource is too high-level for your character.")
                     return None
                 else:
-                    print("An error occured while gathering the ressource.")
+                    print("An error occurred while gathering the resource.")
                     return None
         except aiohttp.ClientError as e:
             print(f"POST request failed: {e}")
@@ -141,7 +141,7 @@ class Character:
                     cooldown = data['data']["cooldown"]["total_seconds"]
                     print(f'Cooldown: {cooldown}')
                     await asyncio.sleep(cooldown)
-                    return data
+                    return data['data']
                 else:
                     print(f'error : {response.status}')
                     print(data)
@@ -159,13 +159,13 @@ class Character:
         try:
             async with self.session.post(url, json=equip_data, headers=self.headers) as response:
                 data = await response.json()
-                print(f'---  {self.name}: equip {slot} {code}  |  {self.get_time()}  ---')
+                print(f'---  {self.name}: equip ({slot},{code})  |  {self.get_time()}  ---')
                 if response.status == 200:
                     print(f'Equipment added: {slot} {code}')
                     cooldown = data['data']["cooldown"]["total_seconds"]
                     print(f'Cooldown: {cooldown}')
                     await asyncio.sleep(cooldown)
-                    return data
+                    return data['data']
                 else:
                     print(f'error : {response.status}')
                     print(data)
@@ -188,7 +188,7 @@ class Character:
                     cooldown = data['data']["cooldown"]["total_seconds"]
                     print(f'Cooldown: {cooldown}')
                     await asyncio.sleep(cooldown)
-                    return data
+                    return data['data']
                 else:
                     print(f'error : {response.status}')
                     print(data)
@@ -206,13 +206,13 @@ class Character:
         try:
             async with self.session.post(url, json=bank_data, headers=self.headers) as response:
                 data = await response.json()
-                print(f'---  {self.name}: deposit {quantity} {code}  |  {self.get_time()}  ---')
+                print(f'---  {self.name}: deposit ({code},{quantity})  |  {self.get_time()}  ---')
                 if response.status == 200:
                     print(f'Deposited: {quantity} {code}')
                     cooldown = data['data']["cooldown"]["total_seconds"]
                     print(f'Cooldown: {cooldown}')
                     await asyncio.sleep(cooldown)
-                    return data
+                    return data['data']
                 else:
                     print(f'error : {response.status}')
                     print(data)
@@ -230,13 +230,13 @@ class Character:
         try:
             async with self.session.post(url, json=bank_data, headers=self.headers) as response:
                 data = await response.json()
-                print(f'---  {self.name}: withdraw {quantity} {code}  |  {self.get_time()}  ---')
+                print(f'---  {self.name}: withdraw ({code},{quantity})  |  {self.get_time()}  ---')
                 if response.status == 200:
                     print(f'Withdraw: {quantity} {code}')
                     cooldown = data['data']["cooldown"]["total_seconds"]
                     print(f'Cooldown: {cooldown}')
                     await asyncio.sleep(cooldown)
-                    return data
+                    return data['data']
                 else:
                     print(f'error : {response.status}')
                     print(data)
@@ -259,7 +259,7 @@ class Character:
                     cooldown = data['data']["cooldown"]["total_seconds"]
                     print(f'Cooldown: {cooldown}')
                     await asyncio.sleep(cooldown)
-                    return data
+                    return data['data']
                 else:
                     print(f'error : {response.status}')
                     print(data)
@@ -282,7 +282,7 @@ class Character:
                     cooldown = data['data']["cooldown"]["total_seconds"]
                     print(f'Cooldown: {cooldown}')
                     await asyncio.sleep(cooldown)
-                    return data
+                    return data['data']
                 else:
                     print(f'error : {response.status}')
                     print(data)
@@ -290,6 +290,31 @@ class Character:
         except aiohttp.ClientError as e:
             print(f"POST request failed: {e}")
             return None
+
+    async def delete_item(self, code='ash_wood', quantity=1):
+        url = self.SERVER + '/my/' + self.name + '/action/delete'
+        delete_data = {
+            'code': code,
+            'quantity': quantity
+        }
+        try:
+            async with self.session.post(url, json=delete_data, headers=self.headers) as response:
+                data = await response.json()
+                print(f'---  {self.name}: delete item ({code},{quantity})  |  {self.get_time()}  ---')
+                if response.status == 200:
+                    print(f'Deleted: {quantity} {code}')
+                    cooldown = data['data']["cooldown"]["total_seconds"]
+                    print(f'Cooldown: {cooldown}')
+                    await asyncio.sleep(cooldown)
+                    return data['data']
+                else:
+                    print(f'error : {response.status}')
+                    print(data)
+                    return None
+        except aiohttp.ClientError as e:
+            print(f"POST request failed: {e}")
+            return None
+
 
     async def get_inventory(self):
         url = self.SERVER + '/my/characters'
@@ -323,8 +348,8 @@ class Character:
                 print(f'---  {self.name}: get logs  |  {self.get_time()}  ---')
                 if response.status == 200:
                     print(f'Logs:')
-                    print(data)
-                    return data
+                    print(data['data'])
+                    return data['data']
                 else:
                     print(f'error : {response.status}')
                     print(data)
@@ -341,8 +366,43 @@ class Character:
                 print(f'---  {self.name}: get stats  |  {self.get_time()}  ---')
                 if response.status == 200:
                     print(f'Stats:')
+                    print(data['data'])
+                    return data['data']
+                else:
+                    print(f'error : {response.status}')
                     print(data)
-                    return data
+                    return None
+        except aiohttp.ClientError as e:
+            print(f"POST request failed: {e}")
+            return None
+
+    async def get_bank_items(self):
+        url = self.SERVER + '/my/bank/items'
+        try:
+            async with self.session.get(url, headers=self.headers) as response:
+                data = await response.json()
+                print(f'---  {self.name}: get bank items  |  {self.get_time()}  ---')
+                if response.status == 200:
+                    print(f'Bank items:')
+                    print(data['data'])
+                    return data['data']
+                else:
+                    print(f'error : {response.status}')
+                    print(data)
+                    return None
+        except aiohttp.ClientError as e:
+            print(f"POST request failed: {e}")
+            return None
+
+    async def get_bank_gold(self):
+        url = self.SERVER + '/my/bank'
+        try:
+            async with self.session.get(url, headers=self.headers) as response:
+                data = await response.json()
+                print(f'---  {self.name}: get bank gold  |  {self.get_time()}  ---')
+                if response.status == 200:
+                    print(f'Gold in bank: {data["data"]["gold"]}')
+                    return data["data"]["gold"]
                 else:
                     print(f'error : {response.status}')
                     print(data)
@@ -352,6 +412,7 @@ class Character:
             return None
 
 
+# usage example
 if __name__ == '__main__':
     async def tkv_run():
         async with Character('tkv') as player:
@@ -363,6 +424,9 @@ if __name__ == '__main__':
             await player.unequip()
             await player.equip()
             await player.get_inventory()
+
+            await player.get_bank_items()
+            await player.get_bank_gold()
 
 
     async def arangaduy_run():
