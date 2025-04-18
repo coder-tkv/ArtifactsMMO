@@ -16,16 +16,16 @@ class Character:
             'Authorization': f'Bearer {self.API_TOKEN}'
         }
 
+    @staticmethod
+    def get_time():
+        return time.strftime("%d.%m - %H:%M:%S", time.localtime())
+
     async def __aenter__(self):
         self.session = aiohttp.ClientSession()
         return self
 
     async def __aexit__(self, exc_type, exc_val, exc_tb):
         await self.session.close()
-
-    @staticmethod
-    def sleep(seconds):
-        time.sleep(seconds)
 
     async def move(self, x, y):
         destination_coord = {
@@ -36,7 +36,7 @@ class Character:
         try:
             async with self.session.post(url, json=destination_coord, headers=self.headers) as response:
                 data = await response.json()
-                print(f'--- {self.name}: move to {x}, {y} ---')
+                print(f'---  {self.name}: move to ({x},{y})  |  {self.get_time()}  ---')
                 if response.status == 200:
                     print(f"You arrived at {data['data']['destination']['name']}")
                     cooldown = data['data']["cooldown"]["total_seconds"]
@@ -59,7 +59,7 @@ class Character:
         try:
             async with self.session.post(url, headers=self.headers) as response:
                 data = await response.json()
-                print(f'--- {self.name}: fight ---')
+                print(f'---  {self.name}: fight  |  {self.get_time()}  ---')
                 if response.status == 200:
                     print(f"You {data['data']['fight']['result']} the fight!")
                     print(f"You win {data['data']['fight']['xp']} Exp points")
@@ -83,7 +83,7 @@ class Character:
         try:
             async with self.session.post(url, headers=self.headers) as response:
                 data = await response.json()
-                print(f'--- {self.name}: rest ---')
+                print(f'---  {self.name}: rest  |  {self.get_time()}  ---')
                 if response.status == 200:
                     print(f"You are resting")
                     print(f'{data['data']['hp_restored']} hp will be restored')
@@ -104,7 +104,7 @@ class Character:
         try:
             async with self.session.post(url, headers=self.headers) as response:
                 data = await response.json()
-                print(f'--- {self.name}: gathering ---')
+                print(f'---  {self.name}: gathering  |  {self.get_time()}  ---')
                 if response.status == 200:
                     print("Your character successfully gathered the resource.")
                     cooldown = data['data']["cooldown"]["total_seconds"]
@@ -135,7 +135,7 @@ class Character:
         try:
             async with self.session.post(url, json=unequip_data, headers=self.headers) as response:
                 data = await response.json()
-                print(f'--- {self.name}: unequip {slot} ---')
+                print(f'---  {self.name}: unequip {slot}  |  {self.get_time()}  ---')
                 if response.status == 200:
                     print(f'Equipment removed: {slot}')
                     cooldown = data['data']["cooldown"]["total_seconds"]
@@ -159,7 +159,7 @@ class Character:
         try:
             async with self.session.post(url, json=equip_data, headers=self.headers) as response:
                 data = await response.json()
-                print(f'--- {self.name}: equip {slot} {code} ---')
+                print(f'---  {self.name}: equip {slot} {code}  |  {self.get_time()}  ---')
                 if response.status == 200:
                     print(f'Equipment added: {slot} {code}')
                     cooldown = data['data']["cooldown"]["total_seconds"]
@@ -182,7 +182,7 @@ class Character:
         try:
             async with self.session.post(url, json=craft_data, headers=self.headers) as response:
                 data = await response.json()
-                print(f'--- {self.name}: craft {code} ---')
+                print(f'---  {self.name}: craft {code}  |  {self.get_time()}  ---')
                 if response.status == 200:
                     print(f'Created: {code}')
                     cooldown = data['data']["cooldown"]["total_seconds"]
@@ -206,7 +206,7 @@ class Character:
         try:
             async with self.session.post(url, json=bank_data, headers=self.headers) as response:
                 data = await response.json()
-                print(f'--- {self.name}: deposit {quantity} {code}  ---')
+                print(f'---  {self.name}: deposit {quantity} {code}  |  {self.get_time()}  ---')
                 if response.status == 200:
                     print(f'Deposited: {quantity} {code}')
                     cooldown = data['data']["cooldown"]["total_seconds"]
@@ -230,7 +230,7 @@ class Character:
         try:
             async with self.session.post(url, json=bank_data, headers=self.headers) as response:
                 data = await response.json()
-                print(f'--- {self.name}: withdraw {quantity} {code},  ---')
+                print(f'---  {self.name}: withdraw {quantity} {code}  |  {self.get_time()}  ---')
                 if response.status == 200:
                     print(f'Withdraw: {quantity} {code}')
                     cooldown = data['data']["cooldown"]["total_seconds"]
@@ -253,7 +253,7 @@ class Character:
         try:
             async with self.session.post(url, json=bank_data, headers=self.headers) as response:
                 data = await response.json()
-                print(f'--- {self.name}: deposit {quantity} gold  ---')
+                print(f'---  {self.name}: deposit {quantity} gold  |  {self.get_time()}  ---')
                 if response.status == 200:
                     print(f'Deposited gold: {quantity}')
                     cooldown = data['data']["cooldown"]["total_seconds"]
@@ -276,7 +276,7 @@ class Character:
         try:
             async with self.session.post(url, json=bank_data, headers=self.headers) as response:
                 data = await response.json()
-                print(f'--- {self.name}: withdraw {quantity} gold  ---')
+                print(f'---  {self.name}: withdraw {quantity} gold  |  {self.get_time()}  ---')
                 if response.status == 200:
                     print(f'Withdraw gold: {quantity}')
                     cooldown = data['data']["cooldown"]["total_seconds"]
@@ -296,7 +296,7 @@ class Character:
         try:
             async with self.session.get(url, headers=self.headers) as response:
                 data = await response.json()
-                print(f'--- {self.name}: get inventory ---')
+                print(f'---  {self.name}: get inventory  |  {self.get_time()}  ---')
                 if response.status == 200:
                     inventory = []
                     for character in data['data']:
@@ -320,7 +320,7 @@ class Character:
         try:
             async with self.session.get(url, headers=self.headers) as response:
                 data = await response.json()
-                print(f'--- {self.name}: get logs ---')
+                print(f'---  {self.name}: get logs  |  {self.get_time()}  ---')
                 if response.status == 200:
                     print(f'Logs:')
                     print(data)
@@ -338,7 +338,7 @@ class Character:
         try:
             async with self.session.get(url, headers=self.headers) as response:
                 data = await response.json()
-                print(f'--- {self.name}: get stats ---')
+                print(f'---  {self.name}: get stats  |  {self.get_time()}  ---')
                 if response.status == 200:
                     print(f'Stats:')
                     print(data)
@@ -354,34 +354,27 @@ class Character:
 
 if __name__ == '__main__':
     async def tkv_run():
-        async with Character('tkv') as tkv:
-            await tkv.move(4, 1)
-            await tkv.deposit_gold(10)
-            await tkv.move(0, 1)
-            await tkv.fight()
-            await tkv.rest()
-            await tkv.move(-1, 0)
-            await tkv.gathering()
-            await tkv.unequip()
-            await tkv.equip()
-            await tkv.move(4, 1)
-            await tkv.withdraw_items('ash_wood', 10)
-            print(await tkv.get_inventory())
+        async with Character('tkv') as player:
+            await player.move(0, 1)
+            await player.fight()
+            await player.rest()
+            await player.move(-1, 0)
+            await player.gathering()
+            await player.unequip()
+            await player.equip()
+            await player.get_inventory()
 
 
     async def arangaduy_run():
-        async with Character('arangaduy') as arangaduy:
-            await arangaduy.move(-1, 0)
-            await arangaduy.gathering()
-            await arangaduy.unequip()
-            await arangaduy.equip()
-            await arangaduy.move(4, 1)
-            await arangaduy.withdraw_gold(10)
-            await arangaduy.deposit_items('ash_wood', 10)
-            await arangaduy.move(0, 1)
-            await arangaduy.fight()
-            await arangaduy.rest()
-            print(await arangaduy.get_inventory())
+        async with Character('arangaduy') as player:
+            await player.move(-1, 0)
+            await player.gathering()
+            await player.unequip()
+            await player.equip()
+            await player.move(0, 1)
+            await player.fight()
+            await player.rest()
+            await player.get_inventory()
 
 
     async def main():
