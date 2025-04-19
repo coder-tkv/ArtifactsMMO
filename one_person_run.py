@@ -4,8 +4,7 @@ import asyncio
 
 async def character_run():
     async with Character('tkv') as character:
-        await character.move(4, 1)
-        await character.deposit_items('feather', 19)
+        await character.deposit_items('raw_chicken', 24)
 
 
 async def main():

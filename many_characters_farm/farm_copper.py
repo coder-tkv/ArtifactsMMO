@@ -1,5 +1,5 @@
-# arangaduy, mark - gathering copper rocks
-# tkv - fight and rest chickens; craft copper, copper_dagger; recycle copper_dagger
+# polina, sonya - gathering ash tree
+# tkv - fight and rest chickens; craft copper
 
 from character_class import Character
 import asyncio
@@ -31,28 +31,20 @@ async def tkv_run():  # get, craft
                         print('copper count in inventory:', count_copper)
                         break
                 if count_copper >= target_copper:
-                    await tkv.move(2, 1)
-                    while count_copper >= target_copper:
-                        await tkv.craft('copper_dagger')
-                        await tkv.recycle('copper_dagger', 1)
-                        inventory = await tkv.get_inventory()
-                        for slot in inventory:
-                            if slot['code'] == 'copper':
-                                count_copper = slot['quantity']
-                                print('copper count in inventory:', count_copper)
-                                break
+                    print('Done')
+                    exit()
             else:
                 await tkv.move(0, 1)
                 await tkv.fight()
                 await tkv.rest()
 
 
-async def arangaduy_run():  # gathering, put
+async def polina_run():  # gathering, put
     target_ore = 5
-    async with Character('arangaduy') as arangaduy:
+    async with Character('polina') as polina:
         while True:
-            await arangaduy.move(2, 0)
-            inventory = await arangaduy.get_inventory()
+            await polina.move(-1, 0)
+            inventory = await polina.get_inventory()
             count_copper_ore = 0
             for slot in inventory:
                 if slot['code'] == 'copper_ore':
@@ -60,18 +52,18 @@ async def arangaduy_run():  # gathering, put
                     print('ore count in inventory:', count_copper_ore)
                     break
             if count_copper_ore >= target_ore:
-                await arangaduy.move(4, 1)
-                await arangaduy.deposit_items('copper_ore', count_copper_ore)
-                await arangaduy.move(2, 0)
+                await polina.move(4, 1)
+                await polina.deposit_items('copper_ore', count_copper_ore)
+                await polina.move(-1, 0)
             else:
-                await arangaduy.gathering()
+                await polina.gathering()
 
-async def mark_run():  # gathering, put
+async def sonya_run():  # gathering, put
     target_ore = 5
-    async with Character('mark') as mark:
+    async with Character('sonya') as sonya:
         while True:
-            await mark.move(2, 0)
-            inventory = await mark.get_inventory()
+            await sonya.move(-1, 0)
+            inventory = await sonya.get_inventory()
             count_copper_ore = 0
             for slot in inventory:
                 if slot['code'] == 'copper_ore':
@@ -79,16 +71,16 @@ async def mark_run():  # gathering, put
                     print('ore count in inventory:', count_copper_ore)
                     break
             if count_copper_ore >= target_ore:
-                await mark.move(4, 1)
-                await mark.deposit_items('copper_ore', count_copper_ore)
-                await mark.move(2, 0)
+                await sonya.move(4, 1)
+                await sonya.deposit_items('copper_ore', count_copper_ore)
+                await sonya.move(-1, 0)
             else:
-                await mark.gathering()
+                await sonya.gathering()
 
 
 
 async def main():
-    await asyncio.gather(tkv_run(), arangaduy_run(), mark_run())
+    await asyncio.gather(tkv_run(), polina_run(), sonya_run())
 
 
 asyncio.run(main())

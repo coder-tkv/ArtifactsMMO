@@ -1,15 +1,15 @@
 from character_class import Character
 import asyncio
 
-async def arangaduy_run():
-    async with Character('arangaduy') as arangaduy:
-        await arangaduy.move(-1, 0)  # move to ash tree
+async def character_run():
+    async with Character('sonya') as character:
+        await character.move(2, 0)  # move to ash tree
         while True:
-            await arangaduy.gathering()
+            await character.gathering()
 
 
 async def main():
-    await arangaduy_run()
+    await character_run()
 
 
 asyncio.run(main())
