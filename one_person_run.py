@@ -2,14 +2,14 @@ from character_class import Character
 import asyncio
 
 
-async def tkv_run():
-    async with Character('tkv') as tkv:
-        await tkv.move(2, 1)
-        await tkv.recycle('copper_dagger', 1)
+async def character_run():
+    async with Character('tkv') as character:
+        await character.move(4, 1)
+        await character.deposit_items('feather', 19)
 
 
 async def main():
-    await asyncio.gather(tkv_run())
+    await character_run()
 
 
 asyncio.run(main())
