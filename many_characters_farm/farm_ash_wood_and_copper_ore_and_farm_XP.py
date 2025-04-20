@@ -9,9 +9,24 @@ import asyncio
 async def tkv_run():  # get
     async with Character('tkv') as tkv:
         await tkv.move(1, -1)
+        counter = 0
+        sum_of_cooldown_fight = 0
+        sum_of_cooldown_rest = 0
+        sum_of_xp = 0
         while True:
-            await tkv.fight()
-            await tkv.rest()
+            fight_result = await tkv.fight()
+            sum_of_cooldown_fight += fight_result["cooldown"]["total_seconds"]
+            sum_of_xp += fight_result['fight']['xp']
+            rest_result = await tkv.rest()
+            sum_of_cooldown_rest += rest_result["cooldown"]["total_seconds"]
+            counter += 1
+            print(f'sum_of_cooldown_fight: {sum_of_cooldown_fight}, '
+                  f'sum_of_cooldown_rest: {sum_of_cooldown_rest}, '
+                  f'sum_of_xp: {sum_of_xp}, '
+                  f'counter: {counter}')
+            print(f'average cooldown fights: {sum_of_cooldown_fight / counter}, '
+                  f'cooldown rest: {sum_of_cooldown_rest / counter} '
+                  f'xp: {sum_of_xp / counter}')
 
 
 async def arangaduy_run():  # gathering ash wood, put
