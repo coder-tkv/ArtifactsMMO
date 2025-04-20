@@ -1,6 +1,6 @@
 # arangaduy, mark - gathering ash tree
 # polina, sonya - gathering ash tree
-# tkv - fight and rest chickens; craft ash_plank, craft copper
+# tkv - craft ash_plank, craft copper
 
 from character_class import Character
 import asyncio
@@ -129,6 +129,7 @@ async def arangaduy_run():  # gathering ash wood, put
             else:
                 await arangaduy.gathering()
 
+
 async def mark_run():  # gathering ash wood, put
     global f_planks
     target_ash_wood = 5
@@ -148,6 +149,7 @@ async def mark_run():  # gathering ash wood, put
                 await mark.move(-1, 0)
             else:
                 await mark.gathering()
+
 
 async def sonya_run():  # gathering copper, put
     global f_copper
@@ -169,6 +171,7 @@ async def sonya_run():  # gathering copper, put
             else:
                 await sonya.gathering()
 
+
 async def polina_run():  # gathering copper, put
     global f_copper
     target_ore = 5
@@ -188,7 +191,6 @@ async def polina_run():  # gathering copper, put
                 await polina.move(2, 0)
             else:
                 await polina.gathering()
-
 
 
 async def main():

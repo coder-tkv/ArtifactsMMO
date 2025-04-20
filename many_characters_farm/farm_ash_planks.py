@@ -58,6 +58,7 @@ async def arangaduy_run():  # gathering, put
             else:
                 await arangaduy.gathering()
 
+
 async def mark_run():  # gathering, put
     target_ash_wood = 5
     async with Character('mark') as mark:
@@ -76,7 +77,6 @@ async def mark_run():  # gathering, put
                 await mark.move(-1, 0)
             else:
                 await mark.gathering()
-
 
 
 async def main():
