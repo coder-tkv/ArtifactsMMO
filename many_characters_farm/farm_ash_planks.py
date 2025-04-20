@@ -1,4 +1,4 @@
-# arangaduy, mark - gathering ash tree
+# arangaduy, mark - gathering ash wood
 # tkv - fight and rest chickens; craft ash_plank
 
 from character_class import Character

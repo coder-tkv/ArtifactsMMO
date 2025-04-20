@@ -1,4 +1,4 @@
-# arangaduy, mark - gathering ash tree
+# arangaduy, mark - gathering ash wood
 # tkv - fight and rest chickens; craft ash_plank, wooden_shield; recycle wooden_shield
 
 from character_class import Character
@@ -47,7 +47,7 @@ async def tkv_run():  # get, craft
                 await tkv.rest()
 
 
-async def arangaduy_run():  # gathering, put
+async def arangaduy_run():  # gathering ash wood, put
     target_ash_wood = 5
     async with Character('arangaduy') as arangaduy:
         while True:
@@ -67,7 +67,7 @@ async def arangaduy_run():  # gathering, put
                 await arangaduy.gathering()
 
 
-async def mark_run():  # gathering, put
+async def mark_run():  # gathering ash wood, put
     target_ash_wood = 5
     async with Character('mark') as mark:
         while True:

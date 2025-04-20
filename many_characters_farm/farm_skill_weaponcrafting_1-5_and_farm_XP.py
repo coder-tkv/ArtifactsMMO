@@ -1,4 +1,4 @@
-# arangaduy, mark - gathering copper rocks
+# sonya, polina - gathering copper ore
 # tkv - fight and rest chickens; craft copper, copper_dagger; recycle copper_dagger
 
 from character_class import Character
@@ -47,7 +47,7 @@ async def tkv_run():  # get, craft
                 await tkv.rest()
 
 
-async def sonya_run():  # gathering, put
+async def sonya_run():  # gathering cupper ore, put
     target_ore = 5
     async with Character('sonya') as sonya:
         while True:
@@ -67,7 +67,7 @@ async def sonya_run():  # gathering, put
                 await sonya.gathering()
 
 
-async def polina_run():  # gathering, put
+async def polina_run():  # gathering cupper ore, put
     target_ore = 5
     async with Character('polina') as polina:
         while True:
