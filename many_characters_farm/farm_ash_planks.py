@@ -1,5 +1,5 @@
 # arangaduy, mark - gathering ash wood
-# tkv - fight and rest chickens; craft ash_plank
+# tkv - fight and rest chickens; craft ash plank
 
 from character_class import Character
 import asyncio

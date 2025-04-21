@@ -47,7 +47,7 @@ async def tkv_run():  # get, craft
                 await tkv.rest()
 
 
-async def sonya_run():  # gathering cupper ore, put
+async def sonya_run():  # gathering copper ore, put
     target_ore = 5
     async with Character('sonya') as sonya:
         while True:
@@ -67,7 +67,7 @@ async def sonya_run():  # gathering cupper ore, put
                 await sonya.gathering()
 
 
-async def polina_run():  # gathering cupper ore, put
+async def polina_run():  # gathering copper ore, put
     target_ore = 5
     async with Character('polina') as polina:
         while True:

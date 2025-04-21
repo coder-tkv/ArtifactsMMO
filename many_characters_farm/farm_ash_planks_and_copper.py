@@ -1,6 +1,6 @@
 # arangaduy, mark - gathering ash wood
 # polina, sonya - gathering copper ore
-# tkv - craft ash_plank, craft copper
+# tkv - craft ash plank, craft copper
 
 from character_class import Character
 import asyncio
