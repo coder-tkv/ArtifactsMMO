@@ -44,7 +44,7 @@ async def tkv_run():  # get
 
 
 async def arangaduy_run():  # gathering ash wood, put
-    target_wood = 30
+    target_wood = 15
     async with Character('arangaduy') as arangaduy:
         while True:
             await arangaduy.move(-1, 0)
@@ -66,7 +66,7 @@ async def arangaduy_run():  # gathering ash wood, put
 
 
 async def mark_run():  # gathering ash wood, put
-    target_wood = 30
+    target_wood = 15
     async with Character('mark') as mark:
         while True:
             await mark.move(-1, 0)
@@ -88,7 +88,7 @@ async def mark_run():  # gathering ash wood, put
 
 
 async def sonya_run():  # gathering copper ore, put
-    target_ore = 30
+    target_ore = 15
     async with Character('sonya') as sonya:
         while True:
             await sonya.move(2, 0)
@@ -110,7 +110,7 @@ async def sonya_run():  # gathering copper ore, put
 
 
 async def polina_run():  # gathering copper ore, put
-    target_ore = 30
+    target_ore = 15
     async with Character('polina') as polina:
         while True:
             await polina.move(2, 0)
